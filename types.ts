@@ -1,3 +1,8 @@
+export interface Store {
+  id: number;
+  name: string;
+}
+
 export interface ProductResponse {
   product: Product;
   sizes: Size[];

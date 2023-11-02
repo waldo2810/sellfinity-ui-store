@@ -18,7 +18,7 @@ const useCart = create(
       addItem: (cartItem: CartItem) => {
         const currentItems = get().items;
         const existingItem = currentItems.find(
-          (item) => item.product.id === cartItem.product.id
+          (item) => item.product.id === cartItem.product.id,
         );
 
         if (existingItem) {
@@ -39,8 +39,8 @@ const useCart = create(
     {
       name: "cart-storage",
       storage: createJSONStorage(() => localStorage),
-    }
-  )
+    },
+  ),
 );
 
 export default useCart;

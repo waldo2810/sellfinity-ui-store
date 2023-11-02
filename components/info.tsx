@@ -2,8 +2,8 @@
 
 import { ShoppingCart } from "lucide-react";
 
-import Currency from "@/components/ui/currency";
-import Button from "@/components/ui/button";
+import Currency from "./ui/currency";
+import Button from "./ui/button";
 import { CartItem, Color, ProductResponse, Size } from "@/types";
 import useCart from "@/hooks/use-cart";
 import { Badge } from "./ui/badge";
@@ -44,11 +44,11 @@ const Info: React.FC<InfoProps> = ({ data }) => {
         product: data.product,
         sizeIds: selectedSizes,
         colorIds: selectedColors,
-        images: data.images
+        images: data.images,
       };
       cart.addItem(cartItem);
     } else {
-      toast.error("No se ha seleccionado talla y/o color")
+      toast.error("No se ha seleccionado talla y/o color");
     }
   };
 
@@ -66,11 +66,12 @@ const Info: React.FC<InfoProps> = ({ data }) => {
           <h3 className="font-semibold text-black">Elige tus tallas:</h3>
           {data?.sizes?.map((size: Size) => (
             <Badge
+              key={size.id}
               className={cn(
                 "cursor-pointer hover:border-slate-900 text-sm",
                 selectedSizes.includes(size.id)
                   ? "border-slate-900 font-black"
-                  : ""
+                  : "",
               )}
               variant="outline"
               onClick={() => handleSelectedSizes(size.id)}
@@ -83,11 +84,12 @@ const Info: React.FC<InfoProps> = ({ data }) => {
           <h3 className="font-semibold text-black">Colors:</h3>
           {data?.colors?.map((color: Color) => (
             <Badge
+              key={color.id}
               className={cn(
                 "cursor-pointer hover:border-slate-900 text-sm flex gap-3",
                 selectedColors.includes(color.id)
                   ? "border-slate-900 font-black"
-                  : ""
+                  : "",
               )}
               variant="outline"
               onClick={() => handleSelectedColors(color.id)}

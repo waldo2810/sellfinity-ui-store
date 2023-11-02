@@ -1,15 +1,13 @@
 "use client";
 
 import Image from "next/image";
-import { MouseEventHandler, useState } from "react";
-import { Expand, ShoppingCart } from "lucide-react";
-import { useRouter } from "next/navigation";
-
-import Currency from "@/components/ui/currency";
-import IconButton from "@/components/ui/icon-button";
+import { MouseEventHandler } from "react";
+import { Expand } from "lucide-react";
+import { useParams, useRouter } from "next/navigation";
+import Currency from "./currency";
+import IconButton from "./icon-button";
 import usePreviewModal from "@/hooks/use-preview-modal";
-import useCart from "@/hooks/use-cart";
-import { Category, Product, ProductResponse } from "@/types";
+import { Category, ProductResponse } from "@/types";
 import { Badge } from "./badge";
 
 interface ProductCard {
@@ -17,12 +15,13 @@ interface ProductCard {
 }
 
 const ProductCard: React.FC<ProductCard> = ({ data }) => {
-  console.log(data)
+  const params = useParams();
   const previewModal = usePreviewModal();
   const router = useRouter();
 
   const handleClick = () => {
-    router.push(`/product/${data?.product.id}`);
+    //TODO storeId?
+    router.push(`${params.storeId}/product/${data?.product.id}`);
   };
 
   const onPreview: MouseEventHandler<HTMLButtonElement> = (event) => {
@@ -39,7 +38,11 @@ const ProductCard: React.FC<ProductCard> = ({ data }) => {
       {/* Image & actions */}
       <div className="aspect-square rounded-xl bg-gray-100 relative">
         <Image
-          src={data.images?.[0]?.url ? data.images?.[0]?.url : "/product-placeholder.png"}
+          src={
+            data.images?.[0]?.url
+              ? data.images?.[0]?.url
+              : "/product-placeholder.png"
+          }
           alt=""
           fill
           className="aspect-square object-cover rounded-md"
@@ -63,7 +66,7 @@ const ProductCard: React.FC<ProductCard> = ({ data }) => {
       <div>
         <p className="font-semibold text-lg">{data?.product.name}</p>
         {data.categories?.map((category: Category) => (
-          <Badge>{category.name}</Badge>
+          <Badge key={category.id}>{category.name}</Badge>
         ))}
       </div>
       {/* Price & Reiew */}

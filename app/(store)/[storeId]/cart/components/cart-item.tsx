@@ -1,11 +1,11 @@
-import Image from "next/image";
-import { X } from "lucide-react";
-
+import getSize from "@/actions/get-size";
+import getColor from "@/actions/get-color";
 import IconButton from "@/components/ui/icon-button";
 import Currency from "@/components/ui/currency";
 import useCart from "@/hooks/use-cart";
 import { CartItem } from "@/types";
-import getSize from "@/actions/get-size";
+import Image from "next/image";
+import { X } from "lucide-react";
 
 interface CartItemProps {
 	data: CartItem;
@@ -15,6 +15,7 @@ const CartItem: React.FC<CartItemProps> = ({ data }) => {
 	const cart = useCart();
 
 	const retrieveSize = async (id: number) => await getSize(id);
+	const retrieveColor = async (id: number) => await getColor(id);
 
 	const onRemove = () => {
 		cart.removeItem(data.product.id);
@@ -25,7 +26,7 @@ const CartItem: React.FC<CartItemProps> = ({ data }) => {
 			<div className="relative h-24 w-24 rounded-md overflow-hidden sm:h-48 sm:w-48">
 				<Image
 					fill
-					src={data.images[0].url}
+					src={data.images[0] ? data.images[0].url : "/product-placeholder.png"}
 					alt=""
 					className="object-cover object-center"
 				/>
@@ -43,11 +44,23 @@ const CartItem: React.FC<CartItemProps> = ({ data }) => {
 
 					<div className="mt-1 flex flex-col text-sm">
 						<p className="border-l border-gray-200 pl-4 text-gray-500">
-							{data.product.name}
+							{data.colorIds.map((colorId) => (
+								<p key={colorId}>
+									{retrieveColor(colorId).then((color) => (
+										<span>{color.name}</span>
+									))}
+								</p>
+							))}
 						</p>
 						<p className="border-l border-gray-200 pl-4 text-gray-500">
 							{data.sizeIds.map((sizeId) => (
-								<p key={sizeId}>{retrieveSize(sizeId).then((size) => <span>{size.name} ({size.value})</span>)}</p>
+								<p key={sizeId}>
+									{retrieveSize(sizeId).then((size) => (
+										<span>
+											{size.name} ({size.value})
+										</span>
+									))}
+								</p>
 							))}
 						</p>
 					</div>

@@ -1,30 +1,38 @@
-import { Product, ProductResponse } from "@/types";
+import { ProductResponse } from "@/types";
 import qs from "query-string";
+import axios, { AxiosError } from "axios";
 
-const URL=`${process.env.NEXT_PUBLIC_API_URL}/products`;
+const URL = `${process.env.NEXT_PUBLIC_API_URL}/products`;
 
 interface Query {
-  categoryId?: string;
-  colorId?: string;
-  sizeId?: string;
-  isFeatured?: boolean;
+	storeId?: number;
+	categoryId?: string;
+	colorId?: string;
+	sizeId?: string;
+	isFeatured?: boolean;
 }
 
 const getProducts = async (query: Query): Promise<ProductResponse[]> => {
-  const url = qs.stringifyUrl({
-    url: URL,
-    query: { 
-      colorId: query.colorId,
-      sizeId: query.sizeId,
-      categoryId: query.categoryId,
-      isFeatured: query.isFeatured,
-    },
-  });
+	const url = qs.stringifyUrl({
+		url: URL,
+		query: {
+			storeId: query.storeId,
+			colorId: query.colorId,
+			sizeId: query.sizeId,
+			categoryId: query.categoryId,
+			isFeatured: query.isFeatured,
+		},
+	});
 
-  const res = await fetch(url);
-  //console.log(res.json())
-
-  return res.json();
+	try {
+		const { data } = await axios.get(url);
+		return data;
+	} catch (error) {
+		if (error instanceof AxiosError) {
+			console.log(error.response?.data)
+		}
+		return []
+	}
 };
 
 export default getProducts;
