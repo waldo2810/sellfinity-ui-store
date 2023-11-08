@@ -10,7 +10,7 @@ const Navbar = async ({ store }: { store: Store }) => {
 	const categories = await getCategories(store.id);
 
 	return (
-		<div className="border-b py-2">
+		<div className="border-b py-2 mb-10">
 			<Container>
 				<div className="relative px-4 sm:px-6 lg:px-8 flex flex-col items-center gap-4">
 					<div className='w-full flex justify-between items-center'>

@@ -3,21 +3,18 @@
 import { ShoppingBag } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-
 import Button from "./ui/button";
 import useCart from "@/hooks/use-cart";
 
 const NavbarActions = () => {
-	const params = useParams();
 	const [isMounted, setIsMounted] = useState(false);
+	const params = useParams();
+	const router = useRouter();
+	const cart = useCart();
 
 	useEffect(() => {
 		setIsMounted(true);
 	}, []);
-
-	const router = useRouter();
-	const cart = useCart();
-
 	if (!isMounted) {
 		return null;
 	}

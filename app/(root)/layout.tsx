@@ -1,21 +1,18 @@
-import { getStores } from "../../actions/get-stores";
 import { Store } from "@/types";
 import { redirect } from "next/navigation";
-import { Suspense } from "react";
+import { getStores } from "@/actions/get-stores";
 
 export default async function SetupLayout({
-  children,
+	children,
 }: {
-  children: React.ReactNode;
+	children: React.ReactNode;
 }) {
-  const stores: Store[] = await getStores();
-  if (stores !== undefined && stores.length > 0) {
-    redirect(`/${stores[0].id}`);
-  }
+	const stores: Store[] = await getStores();
+	if (stores !== undefined && stores.length > 0) {
+		redirect(`/${stores[0].id}`);
+	}
 
-  return (
-    <>
-      <Suspense fallback={<p>loading...</p>}>{children}</Suspense>
-    </>
-  );
+	return (
+		{ children }
+	);
 }
