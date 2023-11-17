@@ -1,25 +1,24 @@
-import { Billboard } from "@/types";
+// import { Billboard } from "@/types";
 import BillboardGallery from "../billboard-gallery";
+import BillboardLabel from "../billboard-label";
 
 interface BillboardProps {
-  data: Billboard | Billboard[];
+  // data: Billboard[];
+  data: any;
 }
 
 const Billboard: React.FC<BillboardProps> = ({ data }) => {
-  console;
   return (
-    <div className="p-4 sm:p-6 lg:p-8 rounded-xl overflow-hidden">
-      {Array.isArray(data) ? (
+    <div className="px-6 rounded-xl relative pb-4 md:aspect-[4/1] overflow-hidden">
+      {data.length && data.length > 1 ? (
         <BillboardGallery billboards={data} />
       ) : (
         <div
-          style={{ backgroundImage: `url(${data?.imageUrl})` }}
-          className="rounded-xl relative aspect-square md:aspect-[2.4/1] overflow-hidden bg-cover"
+          style={{ backgroundImage: `url(${data[0].imageUrl})` }}
+          className="rounded-xl relative h-40 md:h-60 overflow-hidden bg-cover"
         >
           <div className="h-full w-full flex flex-col justify-center items-center text-center gap-y-8">
-            <div className="font-bold uppercase text-3xl sm:text-5xl lg:text-6xl sm:max-w-xl max-w-xs billboard-text">
-              {data ? data.label : ""}
-            </div>
+            <BillboardLabel text={data[0].label} />
           </div>
         </div>
       )}
@@ -28,3 +27,28 @@ const Billboard: React.FC<BillboardProps> = ({ data }) => {
 };
 
 export default Billboard;
+
+{
+  /* <div */
+}
+{
+  /*   style={{ backgroundImage: `url(${data?.imageUrl})` }}  */
+}
+{
+  /*   className="rounded-xl relative aspect-square md:aspect-[2.4/1] overflow-hidden bg-cover"  */
+}
+{
+  /* >  */
+}
+{
+  /*   <div className="h-full w-full flex flex-col justify-center items-center text-center gap-y-8">  */
+}
+{
+  /*     <BillboardLabel text={data ? data.label : ""} /> */
+}
+{
+  /*   </div>  */
+}
+{
+  /* </div>  */
+}

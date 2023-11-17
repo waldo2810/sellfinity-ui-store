@@ -20,7 +20,7 @@ const MainNav: React.FC<MainNavProps> = ({ data }) => {
   }));
 
   return (
-    <nav className="w-full overflow-auto mx-6 flex md:justify-center items-center gap-4 whitespace-nowrap no-scroll">
+    <nav className="w-full overflow-auto mx-6 flex md:justify-center items-center gap-4 whitespace-nowrap no-scroll pb-2 md:pb-0">
       <Link
         key={`/${params.storeId}/product`}
         href={`/${params.storeId}/product`}
