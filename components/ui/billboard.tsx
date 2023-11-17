@@ -1,10 +1,9 @@
-// import { Billboard } from "@/types";
+import { Billboard } from "@/types";
 import BillboardGallery from "../billboard-gallery";
 import BillboardLabel from "../billboard-label";
 
 interface BillboardProps {
-  // data: Billboard[];
-  data: any;
+  data: Billboard[];
 }
 
 const Billboard: React.FC<BillboardProps> = ({ data }) => {
@@ -27,28 +26,3 @@ const Billboard: React.FC<BillboardProps> = ({ data }) => {
 };
 
 export default Billboard;
-
-{
-  /* <div */
-}
-{
-  /*   style={{ backgroundImage: `url(${data?.imageUrl})` }}  */
-}
-{
-  /*   className="rounded-xl relative aspect-square md:aspect-[2.4/1] overflow-hidden bg-cover"  */
-}
-{
-  /* >  */
-}
-{
-  /*   <div className="h-full w-full flex flex-col justify-center items-center text-center gap-y-8">  */
-}
-{
-  /*     <BillboardLabel text={data ? data.label : ""} /> */
-}
-{
-  /*   </div>  */
-}
-{
-  /* </div>  */
-}

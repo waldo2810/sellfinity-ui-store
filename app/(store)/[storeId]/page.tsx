@@ -1,4 +1,4 @@
-import getBillboard from "@/actions/get-billboard";
+import getBillboards from "@/actions/get-billboards";
 import getProducts from "@/actions/get-products";
 import ProductList from "@/components/product-list";
 import Billboard from "@/components/ui/billboard";
@@ -11,7 +11,7 @@ export default async function HomePage({
 }: {
   params: { storeId: number };
 }) {
-  const billboard = await getBillboard(params.storeId);
+  const billboards = await getBillboards(params.storeId);
   const featuredProducts = await getProducts({
     storeId: params.storeId,
     isFeatured: true,
@@ -20,7 +20,7 @@ export default async function HomePage({
   return (
     <Container>
       <div className="space-y-10 pb-10">
-        <Billboard data={billboard} />
+        <Billboard data={billboards} />
         <div className="flex flex-col gap-y-8 px-4 sm:px-6 lg:px-8">
           {featuredProducts.length ? (
             <ProductList
