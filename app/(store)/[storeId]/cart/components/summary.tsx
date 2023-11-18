@@ -30,6 +30,7 @@ const Summary = () => {
   }, 0);
 
   const onCheckout = async () => {
+    console.log(items)
     try {
       const response = await axios.post(
         // `${process.env.NEXT_PUBLIC_PAYMENTS_API_URL}/checkout/create/mercadopago`,
